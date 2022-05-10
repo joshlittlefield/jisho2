@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="col-xl-8">
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        Kanji # - <a class="mr-2" href="#">{{ kanji.kanji_id }}</a>
+        <small class="text-muted">Heisig Level - <{{ kanji.heisig_level }}</small>
+       
+      </div>
+      <h2 class="article-title">{{ kanji.meaning }}</h2>
+      <p class="article-content">{{ kanji.character }}</p>
+    </div>
+  </article>
+</div>  
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+     
+          {% for kanji in kanjis %}
+          
+          {% if  kanji.heisig_level == 1 -%}
+          
+          <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/') }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ kanji.kanji_id }}</a>
+              <small class="text-muted">{{ kanji.heisig_level }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ kanji.character }}</a></h2>
+            <p class="article-content">{{ kanji.meaning }}</p>
+          </div>
+        </article>
+        
+        
+         
+           {% endif %}
+          
+          
+          {% if  kanji.heisig_level == 2 -%}
+           
+            <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='images/') }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ kanji.kanji_id }}</a>
+              <small class="text-muted">{{ kanji.heisig_level }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ kanji.character }}</a></h2>
+            <p class="article-content">{{ kanji.meaning }}</p>
+          </div>
+        </article>
+          
+           {% endif %}
+            
+          {% endfor %}
+
+    
+  
+{% endblock content %}

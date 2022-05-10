@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="col-xl-8">
+</br>
+ <div class="container-fluid align-content-lg-center">    <h1>Otaku Bulletin Board</h1> </div>
+</br>
+    {% for jisho in jishos %}
+        <article class="media content-section">
+          
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ jisho.id }}</a>
+              <small class="text-muted">{{ jisho.date_created.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('jishos.jisho', jisho_id=jisho.id) }}">{{ jisho.title }}</a></h2>
+            <p class="article-content">{{ jisho.jap_translation }}</p>
+          </div>
+        </article>
+    {% endfor %}
+  </div>
+{% endblock content %}

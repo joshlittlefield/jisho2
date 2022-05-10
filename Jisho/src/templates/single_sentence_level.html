@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+     
+  <div class="container-fluid">
+    <div class="row"> 
+      {% for kanji in kanjis %}
+      
+    
+        <div class="col-sm-3">
+          <div class="card" style="width: 10rem;">
+            <div class="card-body">
+              
+             <div class="card-header" href="#"> <h2>{{ kanji.character }}</h2></div>
+              <div class="card-body">{{ kanji.meaning }}</div>
+              <div class="card-footer">
+                <small class="text-muted" href="#">Heisig Level # {{ kanji.heisig_level }}</small>
+                <small class="text-muted" href="#">Kanji # {{ kanji.kanji_id }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+{% endblock content %}

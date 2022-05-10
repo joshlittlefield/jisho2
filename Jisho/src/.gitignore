@@ -1,0 +1,6 @@
+venv
+__pycache__
+.env
+T4A2.pem
+Otakujisho_key_May2022.pem
+temp_commands.txt

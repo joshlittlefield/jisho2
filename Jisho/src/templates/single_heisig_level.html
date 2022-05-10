@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="col-xl-8">
+          
+         
+        
+</br>
+<div class="container-fluid align-content-lg-center">    <h1>Kanji by Heisig Lessons</h1> </div>
+</br>
+     
+  <div class="container-fluid">
+    <div class="row"> 
+      {% for kanji in kanjis %}
+      
+    
+        <div class="col-sm-3">
+          <div class="card" style="width: 10rem;">
+            <div class="card-body">
+               <div class="card-header" href="#"> <h2>{{ kanji.character }}</h2></div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{ kanji.meaning }}</h4>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted" href="#">第- {{ kanji.heisig_level }}</small>
+                <small class="text-muted" href="#">字- {{ kanji.kanji_id }}</small>
+            </div>
+          </div>
+        </div>
+        
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+{% endblock content %}
