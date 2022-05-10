@@ -33,11 +33,6 @@
         "@first": true
     },
     "workspace": {
-        "@folders": [
-            {
-                "name": "src",
-                "path": "/Jisho/src"
-            }
-        ]
+        "@folders": []
     }
 }
