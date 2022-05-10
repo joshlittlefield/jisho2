@@ -24,8 +24,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: 1
           AWS_S3_BUCKET: 1
         run: |
-          echo DB_URI=sqlite:///:memory: >> .env
-          cd src
+          
           python -m unittest discover tests/
 
   deployment:
