@@ -9,33 +9,47 @@ jobs:
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
-      - name: Set Up Python 3.8
+      - name: Set Up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
-      - name: Install dependencies
+          python-version: 3.9
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run Tests
+        env:
+          FLASK_ENV: testing
+          AWS_ACCESS_KEY_ID: 1
+          AWS_SECRET_ACCESS_KEY: 1
+          AWS_S3_BUCKET: 1
         run: |
+          echo DB_URI=sqlite:///:memory: >> .env
+          cd src
           python -m unittest discover tests/
+
   deployment:
-    needs: test_suite
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fresh clone & repo install
-        uses: appleboy/ssh-action@master
-        with:
-          #IP address of EC2 instance
-          host: 3.229.176.191
-          #User you created on the EC2 instance
-          username: github-actions
-          #Name of the secrets variable where you put your secret key
-          key: 
-          port: 22
-          script: |
-            rm -rf jisho2
-            git clone https://github.com/joshlittlefield/jisho2.git
-            python3.8 -m venv /home/github-actions/jisho2/venv
-            /home/github-actions/jisho2/venv/bin/pip3.8 install -r /home/github-actions/jisho2/requirements.txt
+       needs: test_suite
+       runs-on: ubuntu-latest
+       steps:
+         - name: Fresh clone & repo install
+           uses: appleboy/ssh-action@master
+           with:
+             host: 3.229.176.191
+             username: github-actions
+             key: ${{ secrets.EC2 }}
+             port: 22
+             script: |
+               rm -rf jisho2
+               git clone https://github.com/joshlittlefield/jisho2.git
+               python3 -m venv /home/github-actions/jisho2/venv
+               source /home/github-actions/jisho2/venv/bin/activate
+               pip install -r /home/github-actions/jisho2/requirements.txt
+               chmod +x /home/github-actions/jisho2/script.sh
+               /home/github-actions/jisho2/./script.sh
+               mv /home/github-actions/jisho2/src/migrations /home/github-actions/jisho/
+               cd /home/github-actions/jisho2
+               export FLASK_APP=src/main.py
+               flask db-custom drop
+               flask db upgrade
+               flask db-custom seed
