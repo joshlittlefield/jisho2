@@ -35,7 +35,7 @@ jobs:
            with:
              host: 3.229.176.191
              username: github-actions
-             key: ${{ secrets.EC2 }}
+             key: ${{ secrets.JISHOAPP_KEY }}
              port: 22
              script: |
                rm -rf jisho2
