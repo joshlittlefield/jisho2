@@ -1,7 +1,7 @@
 name: CI/CD
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   test_suite:
@@ -9,4 +9,33 @@ jobs:
     steps:
       - name: Checkout Branch
         uses: actions/checkout@v2
-     
+      - name: Set Up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run Tests
+        run: |
+          python -m unittest discover tests/
+  deployment:
+    needs: test_suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fresh clone & repo install
+        uses: appleboy/ssh-action@master
+        with:
+          #IP address of EC2 instance
+          host: 3.229.176.191
+          #User you created on the EC2 instance
+          username: github-actions
+          #Name of the secrets variable where you put your secret key
+          key: /Jisho/src/Otakujisho_key_May2022.pem
+          port: 22
+          script: |
+            rm -rf jisho2
+            git clone https://github.com/joshlittlefield/jisho2.git
+            python3.8 -m venv /home/github-actions/jisho2/venv
+            /home/github-actions/jisho2/venv/bin/pip3.8 install -r /home/github-actions/jisho2/requirements.txt
