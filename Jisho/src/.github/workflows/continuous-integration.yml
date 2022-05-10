@@ -1,7 +1,7 @@
 name: CI/CD
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   test_suite:
@@ -32,7 +32,7 @@ jobs:
           #User you created on the EC2 instance
           username: github-actions
           #Name of the secrets variable where you put your secret key
-          key: /Jisho/src/Otakujisho_key_May2022.pem
+          key: 
           port: 22
           script: |
             rm -rf jisho2
