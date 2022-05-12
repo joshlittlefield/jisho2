@@ -8,7 +8,7 @@ configparser==4.0.2
 cryptography==2.1.4
 Django==1.11.10
 enum34==1.1.10
-Flask==1.1.4
+Flask==2.1.2
 futures==3.3.0
 idna==2.6
 ikpdb==1.2.3
@@ -27,7 +27,6 @@ parso==0.1.1
 pbr==5.8.1
 pycparser==2.21
 pycrypto==2.6.1
-pygobject==3.26.1
 pylint==1.8.1
 pylint-django==0.8.0
 pylint-flask==0.5
