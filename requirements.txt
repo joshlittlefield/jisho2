@@ -4,7 +4,6 @@ backports.functools-lru-cache==1.6.4
 bcrypt==3.1.7
 cffi==1.15.0
 click==7.1.2
-CodeIntel==0.9.3
 configparser==4.0.2
 cryptography==2.1.4
 Django==1.11.10
